@@ -1,3 +1,4 @@
+// HTPP-запросы
 // console.log("Before");
 // async function foo() {
 //   try {
@@ -15,16 +16,19 @@
 //   console.log("After");
 // }
 // foo();
-async function foo(url) {
-  try {
-    const responce = await fetch(url);
-    if (!responce.ok) {
-      throw new Error(`Ошибка: ${responce.status}`);
-    }
-    const data = await responce.json();
-    console.log("Danniye:", data);
-  } catch (error) {
-    console.log(error.message);
-  }
-}
-foo("https://jsonplaceholder.typicode.com/todos/1");
+// async function foo(url) {
+//   try {
+//     const responce = await fetch(url);
+//     if (!responce.ok) {
+//       throw new Error(`Ошибка: ${responce.status}`);
+//     }
+//     const data = await responce.json();
+//     console.log("Danniye:", data);
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// }
+// foo("https://jsonplaceholder.typicode.com/todos/1");
+
+// Форма для регистрации
+document.getElementById("login-btn").addEventListener;
