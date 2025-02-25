@@ -31,4 +31,15 @@
 // foo("https://jsonplaceholder.typicode.com/todos/1");
 
 // Форма для регистрации
-document.getElementById("login-btn").addEventListener;
+document.getElementById("login-btn").addEventListener("click", async () => {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const message = document.getElementById("message");
+  if (!email || !pesswod) {
+    message.textContent = "Заполните все поля";
+    return;
+  }
+  try {
+    const responce = await fetch("https://connections-api.goit.global/users/login")
+  }
+});
