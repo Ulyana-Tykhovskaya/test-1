@@ -35,11 +35,77 @@ document.getElementById("login-btn").addEventListener("click", async () => {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
   const message = document.getElementById("message");
-  if (!email || !pesswod) {
+
+  if (!email || !password) {
     message.textContent = "Заполните все поля";
     return;
   }
+
   try {
-    const responce = await fetch("https://connections-api.goit.global/users/login")
+    let response = await fetch(
+      "https://connections-api.goit.global/users/login",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      }
+    );
+
+    if (!response.ok) {
+      response = await fetch(
+        "https://connections-api.goit.global/users/signup",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Ошибка: ${response.status}`);
+      }
+    }
+
+    const data = await response.json();
+    localStorage.setItem("token", data.token);
+    message.style.color = "green";
+    message.textContent = "Успешный вход!";
+  } catch (error) {
+    message.textContent = error.message;
+    message.style.color = "red";
+  }
+});
+
+document.getElementById("contact-btn").addEventListener("click", async () => {
+  const token = localStorage.getItem("token");
+  const message = document.getElementById("message");
+
+  if (!token) {
+    message.textContent = "Ошибка: пользователь не авторизован!";
+    message.style.color = "red";
+    return;
+  }
+
+  try {
+    const response = await fetch(
+      "https://connections-api.goit.global/contacts",
+      {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Ошибка: ${response.status}`);
+    }
+
+    const contacts = await response.json();
+    console.log("Контакты:", contacts);
+
+    message.textContent = "Контакты успешно загружены! Смотри в консоли.";
+    message.style.color = "green";
+  } catch (error) {
+    message.textContent = error.message;
+    message.style.color = "red";
   }
 });
