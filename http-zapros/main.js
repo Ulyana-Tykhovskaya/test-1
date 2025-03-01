@@ -118,17 +118,7 @@
 
 // Для рандомного пользователя
 document.getElementById("contact-btn").addEventListener("click", async () => {
-  const name = document.getElementById("name").value.trim();
-  const lastname = document.getElementById("lastname").value.trim();
-  const country = document.getElementById("country").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const photoInput = document.getElementById("photo");
   const message = document.getElementById("message");
-
-  if (!name || !lastname || !country || !email || !photoInput.files.length) {
-    message.textContent = "Заполните все поля";
-    return;
-  }
 
   try {
     const response = await fetch("https://randomuser.me/api/");
@@ -144,6 +134,22 @@ document.getElementById("contact-btn").addEventListener("click", async () => {
     document.getElementById("lastname").value = user.name.last;
     document.getElementById("country").value = user.location.country;
     document.getElementById("email").value = user.email;
+
+    document.getElementById(
+      "display-name"
+    ).textContent = `Имя: ${user.name.first}`;
+    document.getElementById(
+      "display-lastname"
+    ).textContent = `Фамилия: ${user.name.last}`;
+    document.getElementById(
+      "display-country"
+    ).textContent = `Страна: ${user.location.country}`;
+    document.getElementById(
+      "display-email"
+    ).textContent = `Email: ${user.email}`;
+
+    document.getElementById("user-photo").src = user.picture.large;
+
     message.textContent = "Данные успешно загружены!";
   } catch (error) {
     console.error(error);

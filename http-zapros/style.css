@@ -23,18 +23,18 @@ input {
 button {
   width: 100%;
   padding: 10px;
-  background: #007bff;
+  background: palevioletred;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 button:hover {
-  background: #0056b3;
+  background: pink;
 }
 .message {
   margin-top: 10px;
-  color: red;
+  color: rgb(18, 171, 77);
 }
 .btn {
   margin-top: 10px;
